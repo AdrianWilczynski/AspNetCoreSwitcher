@@ -1,7 +1,8 @@
 {
-    "name": "asp-net-core-mvc-go-to-view",
-    "displayName": "",
+    "name": "asp-net-core-mvc-switcher",
+    "displayName": "ASP.NET Core MVC Switcher",
     "description": "",
+    "icon": "img/logo.png",
     "version": "0.0.1",
     "engines": {
         "vscode": "^1.32.0"
