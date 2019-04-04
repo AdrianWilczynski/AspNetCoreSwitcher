@@ -12,6 +12,7 @@ export async function goToController() {
 
     const controllerPath = getControllerPath(path);
     if (!controllerPath || !fs.existsSync(controllerPath)) {
+        vscode.window.showErrorMessage('Unable to find a matching controller.');
         return;
     }
 

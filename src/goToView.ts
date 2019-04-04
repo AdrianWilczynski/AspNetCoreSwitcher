@@ -13,6 +13,7 @@ export async function goToView() {
 
     const viewPath = getViewPath(path, line);
     if (!viewPath || !fs.existsSync(viewPath)) {
+        vscode.window.showErrorMessage('Unable to find a matching view.');
         return;
     }
 
