@@ -30,6 +30,23 @@
                 "title": "Add View..."
             }
         ],
+        "keybindings": [
+            {
+                "command": "extension.goToView",
+                "key": "alt+i",
+                "when": "editorTextFocus && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/"
+            },
+            {
+                "command": "extension.goToController",
+                "key": "alt+i",
+                "when": "resourceFilename=~ /.*\\.cshtml$/"
+            },
+            {
+                "command": "extension.addView",
+                "key": "alt+p",
+                "when": "editorTextFocus && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/"
+            }
+        ],
         "menus": {
             "editor/context": [
                 {
@@ -38,14 +55,14 @@
                     "when": "editorTextFocus && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/"
                 },
                 {
+                    "command": "extension.goToController",
+                    "group": "navigation",
+                    "when": "resourceFilename=~ /.*\\.cshtml$/"
+                },
+                {
                     "command": "extension.addView",
                     "group": "1_modification",
                     "when": "editorTextFocus && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/"
-                },
-                {
-                    "command": "extension.goToController",
-                    "group": "navigation",
-                    "when": "editorTextFocus && resourceFilename=~ /.*\\.cshtml$/"
                 }
             ],
             "commandPalette": [
@@ -54,12 +71,12 @@
                     "when": "editorTextFocus && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/"
                 },
                 {
-                    "command": "extension.addView",
-                    "when": "editorTextFocus && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/"
+                    "command": "extension.goToController",
+                    "when": "resourceFilename=~ /.*\\.cshtml$/"
                 },
                 {
-                    "command": "extension.goToController",
-                    "when": "editorTextFocus && resourceFilename=~ /.*\\.cshtml)$/"
+                    "command": "extension.addView",
+                    "when": "editorTextFocus && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/"
                 }
             ]
         }

@@ -34,6 +34,6 @@ function ensureCreated(viewPath: string) {
 
 function getTemplate(title: string) {
     return '@{' + os.EOL +
-        `    ViewData["Title"] = "${title}"` + os.EOL +
+        `    ViewData["Title"] = "${title}";` + os.EOL +
         '}';
 }
