@@ -1,0 +1,69 @@
+{
+    "name": "asp-net-core-mvc-go-to-view",
+    "displayName": "",
+    "description": "",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.32.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:extension.goToView",
+        "onCommand:extension.goToController"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "extension.goToView",
+                "title": "Go to View"
+            },
+            {
+                "command": "extension.goToController",
+                "title": "Go to Controller"
+            }
+        ],
+        "menus": {
+            "editor/context": [
+                {
+                    "command": "extension.goToView",
+                    "group": "navigation",
+                    "when": "editorTextFocus && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/"
+                },
+                {
+                    "command": "extension.goToController",
+                    "group": "navigation",
+                    "when": "editorTextFocus && resourceFilename=~ /.*\\.cshtml$/"
+                }
+            ],
+            "commandPalette": [
+                {
+                    "command": "extension.goToView",
+                    "group": "navigation",
+                    "when": "editorTextFocus && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/"
+                },
+                {
+                    "command": "extension.goToController",
+                    "group": "navigation",
+                    "when": "editorTextFocus && resourceFilename=~ /.*\\.cshtml)$/"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^3.3.1",
+        "vscode": "^1.1.28",
+        "tslint": "^5.12.1",
+        "@types/node": "^10.12.21",
+        "@types/mocha": "^2.2.42"
+    }
+}
