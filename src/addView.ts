@@ -19,18 +19,21 @@ export function addView() {
         return;
     }
 
-    ensureCreated(viewPath);
+    if (fs.existsSync(viewPath)) {
+        vscode.window.showInformationMessage('View already exists.');
+        return;
+    }
+
+    createView(viewPath);
 }
 
-function ensureCreated(viewPath: string) {
+function createView(viewPath: string) {
     const dirname = path.dirname(viewPath);
     if (!fs.existsSync(dirname)) {
         fs.mkdirSync(dirname, { recursive: true });
     }
 
-    if (!fs.existsSync(viewPath)) {
-        fs.writeFileSync(viewPath, getTemplate(path.basename(viewPath, ext.cshtml)));
-    }
+    fs.writeFileSync(viewPath, getTemplate(path.basename(viewPath, ext.cshtml)));
 }
 
 function getTemplate(title: string) {
