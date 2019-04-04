@@ -15,6 +15,7 @@ export function addView() {
 
     const viewPath = getViewPath(controllerPath, line);
     if (!viewPath) {
+        vscode.window.showErrorMessage('Unable to create a view.');
         return;
     }
 
