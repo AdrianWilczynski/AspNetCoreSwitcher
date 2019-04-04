@@ -5,6 +5,10 @@ export async function goTo(path: string) {
     await vscode.window.showTextDocument(document);
 }
 
+export function getCurrentLine(editor: vscode.TextEditor) {
+    return editor.document.lineAt(editor.selection.start.line).text;
+}
+
 export const ext = {
     cs: '.cs',
     cshtml: '.cshtml'

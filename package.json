@@ -11,7 +11,8 @@
     ],
     "activationEvents": [
         "onCommand:extension.goToView",
-        "onCommand:extension.goToController"
+        "onCommand:extension.goToController",
+        "onCommand:extension.addView"
     ],
     "main": "./out/extension.js",
     "contributes": {
@@ -23,6 +24,10 @@
             {
                 "command": "extension.goToController",
                 "title": "Go to Controller"
+            },
+            {
+                "command": "extension.addView",
+                "title": "Add View..."
             }
         ],
         "menus": {
@@ -30,6 +35,11 @@
                 {
                     "command": "extension.goToView",
                     "group": "navigation",
+                    "when": "editorTextFocus && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/"
+                },
+                {
+                    "command": "extension.addView",
+                    "group": "1_modification",
                     "when": "editorTextFocus && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/"
                 },
                 {
@@ -41,12 +51,14 @@
             "commandPalette": [
                 {
                     "command": "extension.goToView",
-                    "group": "navigation",
+                    "when": "editorTextFocus && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/"
+                },
+                {
+                    "command": "extension.addView",
                     "when": "editorTextFocus && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/"
                 },
                 {
                     "command": "extension.goToController",
-                    "group": "navigation",
                     "when": "editorTextFocus && resourceFilename=~ /.*\\.cshtml)$/"
                 }
             ]
