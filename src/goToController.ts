@@ -17,7 +17,7 @@ export async function goToController() {
     await goTo(getControllerPath(path), 'Unable to find a matching controller.');
 }
 
-function getControllerPath(viewPath: string) {
+export function getControllerPath(viewPath: string) {
     const parentDir = getParentDir(viewPath);
     if (!parentDir) {
         return;
