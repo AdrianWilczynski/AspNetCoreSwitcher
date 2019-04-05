@@ -27,7 +27,6 @@ export const controllerSuffix = 'Controller';
 export const messages = {
     notValid: (name: string) => `This file doesn't look like a ${name}.`,
     unableToFind: (name: string) => `Unable to find a matching ${name}.`,
-    unableToCreateView: 'Unable to create a view.',
     viewAlreadyExists: 'View already exists.',
     notMethodDeclaration: "This line doesn't look like an action method declaration."
 };

@@ -25,13 +25,9 @@ export function addView() {
     }
 
     const viewPath = getViewPath(path, actionName);
-    if (!viewPath) {
-        vscode.window.showErrorMessage(messages.unableToCreateView);
-        return;
-    }
 
     if (fs.existsSync(viewPath)) {
-        vscode.window.showInformationMessage(messages.viewAlreadyExists);
+        vscode.window.showWarningMessage(messages.viewAlreadyExists);
         return;
     }
 
