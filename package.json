@@ -1,7 +1,7 @@
 {
-    "name": "asp-net-core-mvc-switcher",
-    "displayName": "ASP.NET Core MVC Switcher",
-    "description": "",
+    "name": "asp-net-core-switcher",
+    "displayName": "ASP.NET Core Switcher",
+    "description": "Quickly switch between views, controllers, pages and page models in ASP.NET Core using keybindings, context menu or command palette.",
     "icon": "img/logo.png",
     "version": "0.0.1",
     "engines": {
@@ -9,6 +9,23 @@
     },
     "categories": [
         "Other"
+    ],
+    "keywords": [
+        "ASP.NET Core",
+        ".NET Core",
+        "Razor Pages",
+        "MVC",
+        "C#",
+        "CSharp",
+        "Razor",
+        "Keybindings",
+        "Keybinding",
+        "Switch",
+        "Switcher",
+        "Navigate",
+        "Navigation",
+        "Jump",
+        "Open"
     ],
     "activationEvents": [
         "onCommand:extension.goToView",
