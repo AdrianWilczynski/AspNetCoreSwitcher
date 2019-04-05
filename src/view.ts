@@ -2,13 +2,13 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 import { ext, dirs, controllerSuffix } from './shared';
 
-export function getViewPath(controllerPath: string, line: string) {
+export function getViewPath(controllerPath: string, line: string, inShared: boolean = false) {
     const actionName = getActionName(line);
     if (!actionName) {
         return;
     }
 
-    return path.join(getViewsDir(controllerPath), getControllerName(controllerPath), actionName + ext.cshtml);
+    return path.join(getViewsDir(controllerPath), inShared ? dirs.shared : getControllerName(controllerPath), actionName + ext.cshtml);
 }
 
 function getViewsDir(controllerPath: string) {

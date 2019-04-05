@@ -24,7 +24,8 @@ export const ext = {
 export const dirs = {
     views: 'Views',
     controllers: 'Controllers',
-    pages: 'Pages'
+    pages: 'Pages',
+    shared: 'Shared'
 };
 
 export const controllerSuffix = 'Controller';

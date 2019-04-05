@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import * as fs from 'fs';
 import { goTo, getCurrentLine } from './shared';
 import { getViewPath, isController } from './view';
 
@@ -15,5 +16,8 @@ export async function goToView() {
         return;
     }
 
-    await goTo(getViewPath(path, line), 'Unable to find a matching view.');
+    let viewPath = getViewPath(path, line);
+    viewPath = !viewPath || fs.existsSync(viewPath) ? viewPath : getViewPath(path, line, true);
+
+    await goTo(viewPath, 'Unable to find a matching view.');
 }
