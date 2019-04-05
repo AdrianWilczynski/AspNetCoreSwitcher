@@ -3,7 +3,7 @@ import { getControllerPath, isView } from '../goToController';
 
 suite('goToController.ts should', function () {
 
-    test('get controller path', function () {
+    test('get a controller path', function () {
         const path = getControllerPath('C:\\Users\\User\\Desktop\\Projects\\MyProject\\Views\\Home\\Index.cshtml');
         assert.equal(path, 'C:\\Users\\User\\Desktop\\Projects\\MyProject\\Controllers\\HomeController.cs');
     });

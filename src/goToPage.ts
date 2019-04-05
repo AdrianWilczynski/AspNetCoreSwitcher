@@ -46,19 +46,19 @@ export async function goToPageModel() {
     await goTo(getPageModelPath(vscode.window.activeTextEditor.document.fileName));
 }
 
-function getPagePath(pageModelPath: string) {
+export function getPagePath(pageModelPath: string) {
     return path.join(path.dirname(pageModelPath), path.basename(pageModelPath, ext.cshtmlCs) + ext.cshtml);
 }
 
-function getPageModelPath(pagePath: string) {
+export function getPageModelPath(pagePath: string) {
     return path.join(path.dirname(pagePath), path.basename(pagePath, ext.cshtml) + ext.cshtmlCs);
 }
 
-function isPageModel(pageModelPath: string) {
+export function isPageModel(pageModelPath: string) {
     return pageModelPath.endsWith(ext.cshtmlCs) && isLocatedInPagesDir(pageModelPath);
 }
 
-function isPage(pagePath: string, pageText: string) {
+export function isPage(pagePath: string, pageText: string) {
     return pagePath.endsWith(ext.cshtml) && pageText.includes('@page') && isLocatedInPagesDir(pagePath);
 }
 
