@@ -11,7 +11,7 @@ export async function goToView() {
     const path = vscode.window.activeTextEditor.document.fileName;
 
     if (!isController(path)) {
-        vscode.window.showWarningMessage("This doesn't look like a valid controller.");
+        vscode.window.showWarningMessage("This file doesn't look like a valid controller.");
         return;
     }
 

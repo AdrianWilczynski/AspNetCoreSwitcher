@@ -14,7 +14,7 @@ export function addView() {
     const controllerPath = vscode.window.activeTextEditor.document.fileName;
 
     if (!isController(controllerPath)) {
-        vscode.window.showWarningMessage("This doesn't look like a valid controller.");
+        vscode.window.showWarningMessage("This file doesn't look like a valid controller.");
         return;
     }
 

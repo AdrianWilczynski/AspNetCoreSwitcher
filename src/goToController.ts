@@ -10,7 +10,7 @@ export async function goToController() {
     const path = vscode.window.activeTextEditor.document.fileName;
 
     if (!isView(path)) {
-        vscode.window.showWarningMessage("This doesn't look like a valid view.");
+        vscode.window.showWarningMessage("This file doesn't look like a valid view.");
         return;
     }
 
@@ -41,5 +41,5 @@ export function isView(viewPath: string) {
         return;
     }
 
-    return pathSegments[pathSegments.length - 2] === dirs.views;
+    return viewPath.endsWith(ext.cshtml) && pathSegments[pathSegments.length - 2] === dirs.views;
 }

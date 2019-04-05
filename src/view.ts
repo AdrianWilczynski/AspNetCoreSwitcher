@@ -1,4 +1,5 @@
 import * as path from 'path';
+import * as vscode from 'vscode';
 import { ext, dirs, controllerSuffix } from './shared';
 
 export function getViewPath(controllerPath: string, line: string) {
@@ -24,6 +25,7 @@ function getControllerName(controllerPath: string) {
 function getActionName(line: string) {
     const matches = line.match(/(?<!^\w)(IActionResult|ActionResult|ViewResult|IStatusCodeActionResult)[ \t]*>?[ \t]+(\w+)\(.*$/);
     if (!matches) {
+        vscode.window.showWarningMessage("This line doesn't look like an action method declaration.");
         return;
     }
 
@@ -31,5 +33,5 @@ function getActionName(line: string) {
 }
 
 export function isController(controllerPath: string) {
-    return path.dirname(controllerPath).split(path.sep).pop() === dirs.controllers;
+    return controllerPath.endsWith(ext.cs) && path.dirname(controllerPath).split(path.sep).pop() === dirs.controllers;
 }

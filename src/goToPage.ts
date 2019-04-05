@@ -10,7 +10,7 @@ export async function goToPage() {
     const path = vscode.window.activeTextEditor.document.fileName;
 
     if (!isPageModel(path)) {
-        vscode.window.showWarningMessage("This doesn't look like a valid page model.");
+        vscode.window.showWarningMessage("This file doesn't look like a valid page model.");
         return;
     }
 
@@ -26,7 +26,7 @@ export async function goToPageModel() {
     const text = vscode.window.activeTextEditor.document.getText();
 
     if (!isPage(path, text)) {
-        vscode.window.showWarningMessage("This doesn't look like a valid page.");
+        vscode.window.showWarningMessage("This file doesn't look like a valid page.");
         return;
     }
 

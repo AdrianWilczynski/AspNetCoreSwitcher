@@ -7,7 +7,7 @@ export function getCurrentLine(editor: vscode.TextEditor) {
 
 export async function goTo(targetPath: string | undefined, errorMessage: string) {
     if (!targetPath || !fs.existsSync(targetPath)) {
-        vscode.window.showErrorMessage(errorMessage);
+        vscode.window.showWarningMessage(errorMessage);
         return;
     }
 
