@@ -30,6 +30,6 @@ function getActionName(line: string) {
     return matches[1];
 }
 
-export function isLocationValid(controllerPath: string) {
+export function isController(controllerPath: string) {
     return path.dirname(controllerPath).split(path.sep).pop() === dirs.controllers;
 }

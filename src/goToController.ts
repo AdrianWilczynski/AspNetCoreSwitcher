@@ -9,7 +9,8 @@ export async function goToController() {
 
     const path = vscode.window.activeTextEditor.document.fileName;
 
-    if (!isLocationValid(path)) {
+    if (!isView(path)) {
+        vscode.window.showWarningMessage("This doesn't look like a valid view.");
         return;
     }
 
@@ -33,7 +34,7 @@ function getControllersDir(viewPath: string) {
     return path.join(path.dirname(viewPath), '..', '..', dirs.controllers);
 }
 
-function isLocationValid(viewPath: string) {
+function isView(viewPath: string) {
     const pathSegments = path.dirname(viewPath).split(path.sep);
 
     if (pathSegments.length < 2) {

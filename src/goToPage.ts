@@ -9,7 +9,8 @@ export async function goToPage() {
 
     const path = vscode.window.activeTextEditor.document.fileName;
 
-    if (!isLocationValid(path) && !isPageModel(path)) {
+    if (!isPageModel(path)) {
+        vscode.window.showWarningMessage("This doesn't look like a valid page model.");
         return;
     }
 
@@ -24,7 +25,8 @@ export async function goToPageModel() {
     const path = vscode.window.activeTextEditor.document.fileName;
     const text = vscode.window.activeTextEditor.document.getText();
 
-    if (!isLocationValid(path) && !isPage(path, text)) {
+    if (!isPage(path, text)) {
+        vscode.window.showWarningMessage("This doesn't look like a valid page.");
         return;
     }
 
@@ -39,14 +41,14 @@ function getPageModelPath(pagePath: string) {
     return path.join(path.dirname(pagePath), path.basename(pagePath, ext.cshtml) + ext.cshtmlCs);
 }
 
-function isLocationValid(pageModelPath: string) {
-    return pageModelPath.split(path.sep).includes(dirs.pages);
-}
-
 function isPageModel(pageModelPath: string) {
-    return pageModelPath.endsWith(ext.cshtmlCs);
+    return pageModelPath.endsWith(ext.cshtmlCs) && isLocatedInPagesDir(pageModelPath);
 }
 
 function isPage(pagePath: string, pageText: string) {
-    return pagePath.endsWith(ext.cshtml) && pageText.includes('@page');
+    return pagePath.endsWith(ext.cshtml) && pageText.includes('@page') && isLocatedInPagesDir(pagePath);
+}
+
+function isLocatedInPagesDir(pagePath: string) {
+    return pagePath.split(path.sep).includes(dirs.pages);
 }

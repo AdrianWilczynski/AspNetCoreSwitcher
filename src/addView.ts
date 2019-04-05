@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
 import { getCurrentLine, ext } from './shared';
-import { getViewPath, isLocationValid } from './view';
+import { getViewPath, isController } from './view';
 
 export function addView() {
     if (!vscode.window.activeTextEditor) {
@@ -13,7 +13,8 @@ export function addView() {
     const line = getCurrentLine(vscode.window.activeTextEditor);
     const controllerPath = vscode.window.activeTextEditor.document.fileName;
 
-    if (!isLocationValid(controllerPath)) {
+    if (!isController(controllerPath)) {
+        vscode.window.showWarningMessage("This doesn't look like a valid controller.");
         return;
     }
 

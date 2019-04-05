@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { goTo, getCurrentLine } from './shared';
-import { getViewPath, isLocationValid } from './view';
+import { getViewPath, isController } from './view';
 
 export async function goToView() {
     if (!vscode.window.activeTextEditor) {
@@ -10,7 +10,8 @@ export async function goToView() {
     const line = getCurrentLine(vscode.window.activeTextEditor);
     const path = vscode.window.activeTextEditor.document.fileName;
 
-    if (!isLocationValid(path)) {
+    if (!isController(path)) {
+        vscode.window.showWarningMessage("This doesn't look like a valid controller.");
         return;
     }
 
