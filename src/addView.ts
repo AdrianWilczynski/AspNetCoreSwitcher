@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
 import { getCurrentLine, ext, messages } from './shared';
-import { getViewPath, isController, getViewsDir, getControllerName, getActionName } from './view';
+import { getViewPath, isController, getActionName } from './view';
 
 export function addView() {
     if (!vscode.window.activeTextEditor) {
@@ -11,9 +11,9 @@ export function addView() {
     }
 
     const line = getCurrentLine(vscode.window.activeTextEditor);
-    const controllerPath = vscode.window.activeTextEditor.document.fileName;
+    const path = vscode.window.activeTextEditor.document.fileName;
 
-    if (!isController(controllerPath)) {
+    if (!isController(path)) {
         vscode.window.showWarningMessage(messages.notValid('controller'));
         return;
     }
@@ -24,10 +24,7 @@ export function addView() {
         return;
     }
 
-    const controllerName = getControllerName(controllerPath);
-    const viewsDir = getViewsDir(controllerPath);
-
-    const viewPath = getViewPath(viewsDir, controllerName, actionName);
+    const viewPath = getViewPath(path, actionName);
     if (!viewPath) {
         vscode.window.showErrorMessage(messages.unableToCreateView);
         return;

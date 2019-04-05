@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import { goTo, getCurrentLine, messages } from './shared';
-import { getViewPath, isController, getActionName, getControllerName, getViewsDir, getSharedViewPath } from './view';
+import { getViewPath, isController, getActionName } from './view';
 
 export async function goToView() {
     if (!vscode.window.activeTextEditor) {
@@ -22,13 +22,10 @@ export async function goToView() {
         return;
     }
 
-    const controllerName = getControllerName(path);
-    const viewsDir = getViewsDir(path);
-
-    let viewPath = getViewPath(viewsDir, controllerName, actionName);
+    let viewPath = getViewPath(path, actionName);
 
     if (!fs.existsSync(viewPath)) {
-        viewPath = getSharedViewPath(viewsDir, actionName);
+        viewPath = getViewPath(path, actionName, true);
     }
 
     if (!fs.existsSync(viewPath)) {

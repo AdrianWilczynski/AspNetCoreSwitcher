@@ -1,19 +1,15 @@
 import * as path from 'path';
 import { ext, dirs, controllerSuffix } from './shared';
 
-export function getViewPath(viewsDir: string, controllerName: string, actionName: string) {
-    return path.join(viewsDir, controllerName, actionName + ext.cshtml);
+export function getViewPath(controllerPath: string, actionName: string, inShared: boolean = false) {
+    return path.join(getViewsDir(controllerPath), inShared ? dirs.shared : getControllerName(controllerPath), actionName + ext.cshtml);
 }
 
-export function getSharedViewPath(viewsDir: string, actionName: string) {
-    return path.join(viewsDir, dirs.shared, actionName + ext.cshtml);
-}
-
-export function getViewsDir(controllerPath: string) {
+function getViewsDir(controllerPath: string) {
     return path.join(path.dirname(controllerPath), '..', dirs.views);
 }
 
-export function getControllerName(controllerPath: string) {
+function getControllerName(controllerPath: string) {
     const baseName = path.basename(controllerPath, ext.cs);
     return baseName.endsWith(controllerSuffix)
         ? baseName.substring(0, baseName.length - controllerSuffix.length)
