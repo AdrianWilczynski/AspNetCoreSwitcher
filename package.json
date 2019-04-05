@@ -56,6 +56,16 @@
                 "command": "extension.addView",
                 "key": "alt+p",
                 "when": "editorTextFocus && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/"
+            },
+            {
+                "command": "extension.goToPage",
+                "key": "alt+o",
+                "when": "editorTextFocus && resourceFilename=~ /.*\\.cshtml\\.cs$/"
+            },
+            {
+                "command": "extension.goToPageModel",
+                "key": "alt+o",
+                "when": "resourceFilename=~ /.*\\.cshtml$/"
             }
         ],
         "menus": {
