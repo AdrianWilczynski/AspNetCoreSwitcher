@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
-import { goTo, getCurrentLine } from './shared';
-import { getViewPath, isController } from './view';
+import { goTo, getCurrentLine, messages } from './shared';
+import { getViewPath, isController, getActionName, getControllerName, getViewsDir, getSharedViewPath } from './view';
 
 export async function goToView() {
     if (!vscode.window.activeTextEditor) {
@@ -12,12 +12,28 @@ export async function goToView() {
     const path = vscode.window.activeTextEditor.document.fileName;
 
     if (!isController(path)) {
-        vscode.window.showWarningMessage("This file doesn't look like a valid controller.");
+        vscode.window.showWarningMessage(messages.notValid('controller'));
         return;
     }
 
-    let viewPath = getViewPath(path, line);
-    viewPath = !viewPath || fs.existsSync(viewPath) ? viewPath : getViewPath(path, line, true);
+    const actionName = getActionName(line);
+    if (!actionName) {
+        vscode.window.showWarningMessage(messages.notMethodDeclaration);
+        return;
+    }
 
-    await goTo(viewPath, 'Unable to find a matching view.');
+    const controllerName = getControllerName(path);
+    const viewsDir = getViewsDir(path);
+
+    let viewPath = getViewPath(viewsDir, controllerName, actionName);
+
+    if (!fs.existsSync(viewPath)) {
+        viewPath = getSharedViewPath(viewsDir, actionName);
+    }
+
+    if (!fs.existsSync(viewPath)) {
+        vscode.window.showWarningMessage(messages.unableToFind('view'));
+    }
+
+    await goTo(viewPath);
 }

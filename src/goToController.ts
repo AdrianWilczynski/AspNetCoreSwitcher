@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
-import { goTo, controllerSuffix, ext, dirs } from './shared';
+import * as fs from 'fs';
+import { goTo, controllerSuffix, ext, dirs, messages } from './shared';
 
 export async function goToController() {
     if (!vscode.window.activeTextEditor) {
@@ -10,11 +11,21 @@ export async function goToController() {
     const path = vscode.window.activeTextEditor.document.fileName;
 
     if (!isView(path)) {
-        vscode.window.showWarningMessage("This file doesn't look like a valid view.");
+        vscode.window.showWarningMessage(messages.notValid('view'));
         return;
     }
 
-    await goTo(getControllerPath(path), 'Unable to find a matching controller.');
+    const controllerPath = getControllerPath(path);
+    if (!controllerPath) {
+        vscode.window.showWarningMessage(messages.notValid('view'));
+        return;
+    }
+
+    if (!fs.existsSync(controllerPath)) {
+        vscode.window.showWarningMessage(messages.unableToFind('controller'));
+    }
+
+    await goTo(controllerPath);
 }
 
 export function getControllerPath(viewPath: string) {

@@ -2,8 +2,8 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
-import { getCurrentLine, ext } from './shared';
-import { getViewPath, isController } from './view';
+import { getCurrentLine, ext, messages } from './shared';
+import { getViewPath, isController, getViewsDir, getControllerName, getActionName } from './view';
 
 export function addView() {
     if (!vscode.window.activeTextEditor) {
@@ -14,18 +14,27 @@ export function addView() {
     const controllerPath = vscode.window.activeTextEditor.document.fileName;
 
     if (!isController(controllerPath)) {
-        vscode.window.showWarningMessage("This file doesn't look like a valid controller.");
+        vscode.window.showWarningMessage(messages.notValid('controller'));
         return;
     }
 
-    const viewPath = getViewPath(controllerPath, line);
+    const actionName = getActionName(line);
+    if (!actionName) {
+        vscode.window.showWarningMessage(messages.notMethodDeclaration);
+        return;
+    }
+
+    const controllerName = getControllerName(controllerPath);
+    const viewsDir = getViewsDir(controllerPath);
+
+    const viewPath = getViewPath(viewsDir, controllerName, actionName);
     if (!viewPath) {
-        vscode.window.showErrorMessage('Unable to create a view.');
+        vscode.window.showErrorMessage(messages.unableToCreateView);
         return;
     }
 
     if (fs.existsSync(viewPath)) {
-        vscode.window.showInformationMessage('View already exists.');
+        vscode.window.showInformationMessage(messages.viewAlreadyExists);
         return;
     }
 

@@ -1,31 +1,28 @@
 import * as path from 'path';
-import * as vscode from 'vscode';
 import { ext, dirs, controllerSuffix } from './shared';
 
-export function getViewPath(controllerPath: string, line: string, inShared: boolean = false) {
-    const actionName = getActionName(line);
-    if (!actionName) {
-        return;
-    }
-
-    return path.join(getViewsDir(controllerPath), inShared ? dirs.shared : getControllerName(controllerPath), actionName + ext.cshtml);
+export function getViewPath(viewsDir: string, controllerName: string, actionName: string) {
+    return path.join(viewsDir, controllerName, actionName + ext.cshtml);
 }
 
-function getViewsDir(controllerPath: string) {
+export function getSharedViewPath(viewsDir: string, actionName: string) {
+    return path.join(viewsDir, dirs.shared, actionName + ext.cshtml);
+}
+
+export function getViewsDir(controllerPath: string) {
     return path.join(path.dirname(controllerPath), '..', dirs.views);
 }
 
-function getControllerName(controllerPath: string) {
+export function getControllerName(controllerPath: string) {
     const baseName = path.basename(controllerPath, ext.cs);
     return baseName.endsWith(controllerSuffix)
         ? baseName.substring(0, baseName.length - controllerSuffix.length)
         : baseName;
 }
 
-function getActionName(line: string) {
+export function getActionName(line: string) {
     const matches = line.match(/(?<!^\w)(IActionResult|ActionResult|ViewResult|IStatusCodeActionResult)[ \t]*>?[ \t]+(\w+)\(.*$/);
     if (!matches) {
-        vscode.window.showWarningMessage("This line doesn't look like an action method declaration.");
         return;
     }
 

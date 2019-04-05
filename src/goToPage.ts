@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
-import { goTo, dirs, ext } from './shared';
+import * as fs from 'fs';
+import { goTo, dirs, ext, messages } from './shared';
 
 export async function goToPage() {
     if (!vscode.window.activeTextEditor) {
@@ -10,11 +11,17 @@ export async function goToPage() {
     const path = vscode.window.activeTextEditor.document.fileName;
 
     if (!isPageModel(path)) {
-        vscode.window.showWarningMessage("This file doesn't look like a valid page model.");
+        vscode.window.showWarningMessage(messages.notValid('page model'));
         return;
     }
 
-    await goTo(getPagePath(path), 'Unable to find a matching page.');
+    const pagePath = getPagePath(path);
+
+    if (!fs.existsSync(pagePath)) {
+        vscode.window.showWarningMessage(messages.unableToFind('page'));
+    }
+
+    await goTo(pagePath);
 }
 
 export async function goToPageModel() {
@@ -26,11 +33,17 @@ export async function goToPageModel() {
     const text = vscode.window.activeTextEditor.document.getText();
 
     if (!isPage(path, text)) {
-        vscode.window.showWarningMessage("This file doesn't look like a valid page.");
+        vscode.window.showWarningMessage(messages.notValid('page'));
         return;
     }
 
-    await goTo(getPageModelPath(vscode.window.activeTextEditor.document.fileName), 'Unable to find a matching page model.');
+    const pageModelPath = getPageModelPath(path);
+
+    if (!fs.existsSync(pageModelPath)) {
+        vscode.window.showWarningMessage(messages.unableToFind('page model'));
+    }
+
+    await goTo(getPageModelPath(vscode.window.activeTextEditor.document.fileName));
 }
 
 function getPagePath(pageModelPath: string) {
