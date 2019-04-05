@@ -1,18 +1,18 @@
 import { assert } from 'chai';
 import { getControllerPath, isView } from '../goToController';
 
-suite("goToController.ts should", function () {
+suite('goToController.ts should', function () {
 
-    test("get controller path", function () {
+    test('get controller path', function () {
         const path = getControllerPath('C:\\Users\\User\\Desktop\\Projects\\MyProject\\Views\\Home\\Index.cshtml');
         assert.equal(path, 'C:\\Users\\User\\Desktop\\Projects\\MyProject\\Controllers\\HomeController.cs');
     });
 
-    test("recognize a valid view path", function () {
+    test('recognize a valid view path', function () {
         assert.isTrue(isView('C:\\Users\\User\\Desktop\\Projects\\MyProject\\Views\\Home\\Index.cshtml'));
     });
 
-    test("recognize an invalid view path", function () {
+    test('recognize an invalid view path', function () {
         assert.isFalse(isView('C:\\Users\\User\\Desktop\\Projects\\MyProject\\Views\\_Layout.cshtml'));
         assert.isFalse(isView('C:\\Users\\User\\Desktop\\Projects\\MyProject\\Templates\\Home\\Index.cshtml'));
         assert.isFalse(isView('C:\\Users\\User\\Desktop\\Projects\\MyProject\\Templates\\Home\\Home\\Index.cshtml'));
