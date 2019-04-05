@@ -22,12 +22,12 @@ function getControllerName(controllerPath: string) {
 }
 
 function getActionName(line: string) {
-    const matches = line.match(/(\w+)[ \t]*\(.*$/);
+    const matches = line.match(/(?<!^\w)(IActionResult|ActionResult|ViewResult|IStatusCodeActionResult)[ \t]*>?[ \t]+(\w+)\(.*$/);
     if (!matches) {
         return;
     }
 
-    return matches[1];
+    return matches[2];
 }
 
 export function isController(controllerPath: string) {
