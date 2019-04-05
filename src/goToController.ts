@@ -34,7 +34,7 @@ function getControllersDir(viewPath: string) {
     return path.join(path.dirname(viewPath), '..', '..', dirs.controllers);
 }
 
-function isView(viewPath: string) {
+export function isView(viewPath: string) {
     const pathSegments = path.dirname(viewPath).split(path.sep);
 
     if (pathSegments.length < 2) {
