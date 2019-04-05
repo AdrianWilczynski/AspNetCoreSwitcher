@@ -1,7 +1,6 @@
 import * as vscode from 'vscode';
-import * as fs from 'fs';
 import { goTo, getCurrentLine } from './shared';
-import { getViewPath } from './view';
+import { getViewPath, isLocationValid } from './view';
 
 export async function goToView() {
     if (!vscode.window.activeTextEditor) {
@@ -11,11 +10,9 @@ export async function goToView() {
     const line = getCurrentLine(vscode.window.activeTextEditor);
     const path = vscode.window.activeTextEditor.document.fileName;
 
-    const viewPath = getViewPath(path, line);
-    if (!viewPath || !fs.existsSync(viewPath)) {
-        vscode.window.showErrorMessage('Unable to find a matching view.');
+    if (!isLocationValid(path)) {
         return;
     }
 
-    await goTo(viewPath);
+    await goTo(getViewPath(path, line), 'Unable to find a matching view.');
 }

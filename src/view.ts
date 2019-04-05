@@ -2,10 +2,6 @@ import * as path from 'path';
 import { ext, dirs, controllerSuffix } from './shared';
 
 export function getViewPath(controllerPath: string, line: string) {
-    if (!isLocationValid(controllerPath)) {
-        return;
-    }
-
     const actionName = getActionName(line);
     if (!actionName) {
         return;
@@ -19,10 +15,10 @@ function getViewsDir(controllerPath: string) {
 }
 
 function getControllerName(controllerPath: string) {
-    const fileBaseName = path.basename(controllerPath, ext.cs);
-    return fileBaseName.endsWith(controllerSuffix)
-        ? fileBaseName.substring(0, fileBaseName.length - controllerSuffix.length)
-        : fileBaseName;
+    const baseName = path.basename(controllerPath, ext.cs);
+    return baseName.endsWith(controllerSuffix)
+        ? baseName.substring(0, baseName.length - controllerSuffix.length)
+        : baseName;
 }
 
 function getActionName(line: string) {
@@ -34,6 +30,6 @@ function getActionName(line: string) {
     return matches[1];
 }
 
-function isLocationValid(controllerPath: string) {
+export function isLocationValid(controllerPath: string) {
     return path.dirname(controllerPath).split(path.sep).pop() === dirs.controllers;
 }

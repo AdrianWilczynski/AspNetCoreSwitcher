@@ -1,6 +1,5 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
-import * as fs from 'fs';
 import { goTo, controllerSuffix, ext, dirs } from './shared';
 
 export async function goToController() {
@@ -10,20 +9,14 @@ export async function goToController() {
 
     const path = vscode.window.activeTextEditor.document.fileName;
 
-    const controllerPath = getControllerPath(path);
-    if (!controllerPath || !fs.existsSync(controllerPath)) {
-        vscode.window.showErrorMessage('Unable to find a matching controller.');
+    if (!isLocationValid(path)) {
         return;
     }
 
-    await goTo(controllerPath);
+    await goTo(getControllerPath(path), 'Unable to find a matching controller.');
 }
 
 function getControllerPath(viewPath: string) {
-    if (!IsLocationValid(viewPath)) {
-        return;
-    }
-
     const parentDir = getParentDir(viewPath);
     if (!parentDir) {
         return;
@@ -40,7 +33,7 @@ function getControllersDir(viewPath: string) {
     return path.join(path.dirname(viewPath), '..', '..', dirs.controllers);
 }
 
-function IsLocationValid(viewPath: string) {
+function isLocationValid(viewPath: string) {
     const pathSegments = path.dirname(viewPath).split(path.sep);
 
     if (pathSegments.length < 2) {
