@@ -35,11 +35,15 @@ function getControllersDir(viewPath: string) {
 }
 
 export function isView(viewPath: string) {
+    return viewPath.endsWith(ext.cshtml) && isLocatedInViewsDir(viewPath);
+}
+
+function isLocatedInViewsDir(viewPath: string) {
     const pathSegments = path.dirname(viewPath).split(path.sep);
 
     if (pathSegments.length < 2) {
-        return;
+        return false;
     }
 
-    return viewPath.endsWith(ext.cshtml) && pathSegments[pathSegments.length - 2] === dirs.views;
+    return pathSegments[pathSegments.length - 2] === dirs.views;
 }

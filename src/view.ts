@@ -33,5 +33,9 @@ function getActionName(line: string) {
 }
 
 export function isController(controllerPath: string) {
-    return controllerPath.endsWith(ext.cs) && path.dirname(controllerPath).split(path.sep).pop() === dirs.controllers;
+    return controllerPath.endsWith(ext.cs) && isLocatedInControllersDir(controllerPath);
+}
+
+function isLocatedInControllersDir(controllerPath: string) {
+    return path.dirname(controllerPath).split(path.sep).pop() === dirs.controllers;
 }
