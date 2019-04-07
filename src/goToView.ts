@@ -1,14 +1,13 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
-import { goTo, getCurrentLine, messages } from './shared';
-import { getViewPath, isController, getActionName } from './view';
+import { goTo, messages } from './shared';
+import { getViewPath, isController, getClosestActionName } from './view';
 
 export async function goToView() {
     if (!vscode.window.activeTextEditor) {
         return;
     }
 
-    const line = getCurrentLine(vscode.window.activeTextEditor);
     const path = vscode.window.activeTextEditor.document.fileName;
 
     if (!isController(path)) {
@@ -16,9 +15,9 @@ export async function goToView() {
         return;
     }
 
-    const actionName = getActionName(line);
+    const actionName = getClosestActionName(vscode.window.activeTextEditor);
     if (!actionName) {
-        vscode.window.showWarningMessage(messages.notMethodDeclaration);
+        vscode.window.showWarningMessage(messages.unableToFindAction);
         return;
     }
 

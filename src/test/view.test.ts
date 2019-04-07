@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { getViewPath, isController, getActionName } from '../view';
+import { getViewPath, isController, getActionNameFromLine } from '../view';
 
 suite('view.ts should', function () {
 
@@ -29,14 +29,14 @@ suite('view.ts should', function () {
     });
 
     test('parse an action method declaration', function () {
-        assert.equal('Index', getActionName('   public IActionResult Index(int id)'));
-        assert.equal('Index', getActionName('   public Task<IActionResult> Index(ItemDto item)'));
-        assert.equal('Update', getActionName('public Task<System.Web.Mvc.ViewResultBase.ViewResult> Update(ItemDto item)'));
+        assert.equal('Index', getActionNameFromLine('   public IActionResult Index(int id)'));
+        assert.equal('Index', getActionNameFromLine('   public Task<IActionResult> Index(ItemDto item)'));
+        assert.equal('Update', getActionNameFromLine('public Task<System.Web.Mvc.ViewResultBase.ViewResult> Update(ItemDto item)'));
     });
 
     test('return undefined when passed unparsable line', function () {
-        assert.isUndefined(getActionName('   return View()'));
-        assert.isUndefined(getActionName('   public string  Update()'));
-        assert.isUndefined(getActionName('var number = 66'));
+        assert.isUndefined(getActionNameFromLine('   return View()'));
+        assert.isUndefined(getActionNameFromLine('   public string  Update()'));
+        assert.isUndefined(getActionNameFromLine('var number = 66'));
     });
 });
