@@ -5,7 +5,7 @@
     "publisher": "adrianwilczynski",
     "repository": {
         "type": "git",
-        "url": "https://github.com/AdrianWilczynski/AspNetCoreSwitcher.git"        
+        "url": "https://github.com/AdrianWilczynski/AspNetCoreSwitcher.git"
     },
     "icon": "img/logo.png",
     "version": "0.0.1",
