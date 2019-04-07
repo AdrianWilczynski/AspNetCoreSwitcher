@@ -34,12 +34,24 @@ export function addView() {
 }
 
 function createView(viewPath: string) {
-    const dir = path.dirname(viewPath);
-    if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
-    }
-
+    createDirectory(viewPath);
     fs.writeFileSync(viewPath, getTemplate(path.basename(viewPath, ext.cshtml)));
+}
+
+function createDirectory(viewPath: string) {
+    const parsedPath = path.parse(viewPath);
+
+    const dirPath = parsedPath.dir;
+    const root = parsedPath.root;
+
+    let partialDirPath = root;
+    for (const dir of dirPath.split(path.sep).splice(1)) {
+        partialDirPath = path.join(partialDirPath, dir);
+
+        if (!fs.existsSync(partialDirPath)) {
+            fs.mkdirSync(partialDirPath);
+        }
+    }
 }
 
 function getTemplate(title: string) {
