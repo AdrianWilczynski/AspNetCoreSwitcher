@@ -23,6 +23,7 @@ export async function goToController() {
 
     if (!fs.existsSync(controllerPath)) {
         vscode.window.showWarningMessage(messages.unableToFind('controller'));
+        return;
     }
 
     await goTo(controllerPath);
