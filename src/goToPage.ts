@@ -31,9 +31,8 @@ export async function goToPageModel() {
     }
 
     const path = vscode.window.activeTextEditor.document.fileName;
-    const text = vscode.window.activeTextEditor.document.getText();
 
-    if (!isPage(path, text)) {
+    if (!isPage(path)) {
         vscode.window.showWarningMessage(messages.notValid('page'));
         return;
     }
@@ -60,8 +59,8 @@ export function isPageModel(pageModelPath: string) {
     return pageModelPath.endsWith(ext.cshtmlCs) && isLocatedInPagesDir(pageModelPath);
 }
 
-export function isPage(pagePath: string, pageText: string) {
-    return pagePath.endsWith(ext.cshtml) && pageText.includes('@page') && isLocatedInPagesDir(pagePath);
+export function isPage(pagePath: string) {
+    return pagePath.endsWith(ext.cshtml) && isLocatedInPagesDir(pagePath);
 }
 
 function isLocatedInPagesDir(pagePath: string) {

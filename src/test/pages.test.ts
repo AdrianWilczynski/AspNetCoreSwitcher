@@ -14,10 +14,8 @@ suite('goToPage.ts should', function () {
     });
 
     test('check if file is a page', function () {
-        assert.isTrue(isPage('C:\\Users\\User\\Desktop\\Projects\\MyProject\\Pages\\Index.cshtml', '@page \n @model IndexModel'));
-
-        assert.isFalse(isPage('C:\\Users\\User\\Desktop\\Projects\\MyProject\\Pages\\Index.cshtml', '@model MyViewModel'));
-        assert.isFalse(isPage('C:\\Users\\User\\Desktop\\Projects\\MyProject\\Views\\Index.cshtml', '@page \n @model IndexModel'));
+        assert.isTrue(isPage('C:\\Users\\User\\Desktop\\Projects\\MyProject\\Pages\\Index.cshtml'));
+        assert.isFalse(isPage('C:\\Users\\User\\Desktop\\Projects\\MyProject\\Views\\Index.cshtml'));
     });
 
     test('check if file is a page model', function () {
