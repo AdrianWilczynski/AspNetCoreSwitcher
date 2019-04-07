@@ -18,7 +18,7 @@ function getControllerName(controllerPath: string) {
 }
 
 export function getClosestActionName(editor: vscode.TextEditor) {
-    const currentLineNumber = editor.selection.start.line;
+    const currentLineNumber = editor.selection.end.line;
 
     for (let index = currentLineNumber; index >= 0; index--) {
         const line = editor.document.lineAt(index).text;

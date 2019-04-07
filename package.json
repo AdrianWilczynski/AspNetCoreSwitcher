@@ -121,7 +121,7 @@
             "commandPalette": [
                 {
                     "command": "extension.goToView",
-                    "when": "editorTextFocus && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/"
+                    "when": "editorHasSelection && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/"
                 },
                 {
                     "command": "extension.goToController",
@@ -129,7 +129,7 @@
                 },
                 {
                     "command": "extension.addView",
-                    "when": "editorTextFocus && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/"
+                    "when": "editorHasSelection && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/"
                 },
                 {
                     "command": "extension.goToPage",
