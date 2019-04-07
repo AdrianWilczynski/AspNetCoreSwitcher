@@ -34,11 +34,11 @@ export function addView() {
 }
 
 function createView(viewPath: string) {
-    createDirectory(viewPath);
+    createViewDir(viewPath);
     fs.writeFileSync(viewPath, getTemplate(path.basename(viewPath, ext.cshtml)));
 }
 
-function createDirectory(viewPath: string) {
+function createViewDir(viewPath: string) {
     const parsedPath = path.parse(viewPath);
 
     const dirPath = parsedPath.dir;
