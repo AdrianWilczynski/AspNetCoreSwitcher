@@ -21,7 +21,16 @@ export function activate(context: vscode.ExtensionContext) {
 export function deactivate() { }
 
 function setContext(editor: vscode.TextEditor | undefined) {
-    if (!editor || editor.document.isUntitled || editor.document.uri.scheme !== 'file') {
+    if (!editor) {
+        return;
+    }
+
+    if (editor.document.isUntitled || editor.document.uri.scheme !== 'file') {
+        vscode.commands.executeCommand('setContext', 'isPage', false);
+        vscode.commands.executeCommand('setContext', 'isPageModel', false);
+        vscode.commands.executeCommand('setContext', 'isController', false);
+        vscode.commands.executeCommand('setContext', 'isView', false);
+
         return;
     }
 
