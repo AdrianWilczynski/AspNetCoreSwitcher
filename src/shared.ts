@@ -1,10 +1,3 @@
-import * as vscode from 'vscode';
-
-export async function goTo(targetPath: string) {
-    const document = await vscode.workspace.openTextDocument(targetPath);
-    await vscode.window.showTextDocument(document);
-}
-
 export const ext = {
     cs: '.cs',
     cshtml: '.cshtml',

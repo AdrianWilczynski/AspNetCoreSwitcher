@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
-import { goTo, controllerSuffix, ext, dirs, messages } from './shared';
+import { controllerSuffix, ext, dirs, messages } from './shared';
 
 export async function goToController() {
     if (!vscode.window.activeTextEditor) {
@@ -26,7 +26,8 @@ export async function goToController() {
         return;
     }
 
-    await goTo(controllerPath);
+    const document = await vscode.workspace.openTextDocument(controllerPath);
+    await vscode.window.showTextDocument(document);
 }
 
 export function getControllerPath(viewPath: string) {

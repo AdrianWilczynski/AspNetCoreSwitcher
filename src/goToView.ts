@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
-import { goTo, messages } from './shared';
+import { messages } from './shared';
 import { getViewPath, isController, getClosestActionName } from './view';
 
 export async function goToView() {
@@ -32,5 +32,6 @@ export async function goToView() {
         return;
     }
 
-    await goTo(viewPath);
+    const document = await vscode.workspace.openTextDocument(viewPath);
+    await vscode.window.showTextDocument(document);
 }

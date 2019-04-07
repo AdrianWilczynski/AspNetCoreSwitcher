@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
-import { goTo, dirs, ext, messages } from './shared';
+import { dirs, ext, messages } from './shared';
 
 export async function goToPage() {
     if (!vscode.window.activeTextEditor) {
@@ -22,7 +22,8 @@ export async function goToPage() {
         return;
     }
 
-    await goTo(pagePath);
+    const document = await vscode.workspace.openTextDocument(pagePath);
+    await vscode.window.showTextDocument(document);
 }
 
 export async function goToPageModel() {
@@ -44,7 +45,8 @@ export async function goToPageModel() {
         return;
     }
 
-    await goTo(getPageModelPath(vscode.window.activeTextEditor.document.fileName));
+    const document = await vscode.workspace.openTextDocument(getPageModelPath(vscode.window.activeTextEditor.document.fileName));
+    await vscode.window.showTextDocument(document);
 }
 
 export function getPagePath(pageModelPath: string) {
