@@ -29,6 +29,7 @@ export async function goToView() {
 
     if (!fs.existsSync(viewPath)) {
         vscode.window.showWarningMessage(messages.unableToFind('view'));
+        return;
     }
 
     await goTo(viewPath);

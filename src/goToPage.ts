@@ -19,6 +19,7 @@ export async function goToPage() {
 
     if (!fs.existsSync(pagePath)) {
         vscode.window.showWarningMessage(messages.unableToFind('page'));
+        return;
     }
 
     await goTo(pagePath);
@@ -41,6 +42,7 @@ export async function goToPageModel() {
 
     if (!fs.existsSync(pageModelPath)) {
         vscode.window.showWarningMessage(messages.unableToFind('page model'));
+        return;
     }
 
     await goTo(getPageModelPath(vscode.window.activeTextEditor.document.fileName));
