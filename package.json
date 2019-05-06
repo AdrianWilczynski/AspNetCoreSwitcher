@@ -50,7 +50,7 @@
             },
             {
                 "command": "extension.addView",
-                "title": "Add View..."
+                "title": "Add View"
             },
             {
                 "command": "extension.goToPage",
