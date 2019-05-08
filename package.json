@@ -65,27 +65,27 @@
             {
                 "command": "extension.goToView",
                 "key": "alt+i",
-                "when": "editorTextFocus && resourceScheme == file && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/ && isController"
+                "when": "resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/ && isController"
             },
             {
                 "command": "extension.goToController",
                 "key": "alt+i",
-                "when": "resourceScheme == file && resourceFilename=~ /.*\\.cshtml$/ && isView"
+                "when": "resourceFilename=~ /.*\\.cshtml$/ && isView"
             },
             {
                 "command": "extension.addView",
                 "key": "alt+p",
-                "when": "editorTextFocus && resourceScheme == file && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/ && isController"
+                "when": "resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/ && isController"
             },
             {
                 "command": "extension.goToPage",
                 "key": "alt+o",
-                "when": "editorTextFocus && resourceScheme == file && resourceFilename=~ /.*\\.cshtml\\.cs$/ && isPageModel"
+                "when": "resourceFilename=~ /.*\\.cshtml\\.cs$/ && isPageModel"
             },
             {
                 "command": "extension.goToPageModel",
                 "key": "alt+o",
-                "when": "resourceScheme == file && resourceFilename=~ /.*\\.cshtml$/ && isPage"
+                "when": "resourceFilename=~ /.*\\.cshtml$/ && isPage"
             }
         ],
         "menus": {
@@ -93,49 +93,49 @@
                 {
                     "command": "extension.goToView",
                     "group": "navigation",
-                    "when": "editorTextFocus && resourceScheme == file && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/  && isController"
+                    "when": "resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/  && isController"
                 },
                 {
                     "command": "extension.goToController",
                     "group": "navigation",
-                    "when": "resourceScheme == file && resourceFilename=~ /.*\\.cshtml$/ && isView"
+                    "when": "resourceFilename=~ /.*\\.cshtml$/ && isView"
                 },
                 {
                     "command": "extension.addView",
                     "group": "1_modification",
-                    "when": "editorTextFocus && resourceScheme == file && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/ && isController"
+                    "when": "resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/ && isController"
                 },
                 {
                     "command": "extension.goToPage",
                     "group": "navigation",
-                    "when": "resourceScheme == file && resourceFilename=~ /.*\\.cshtml\\.cs$/ && isPageModel"
+                    "when": "resourceFilename=~ /.*\\.cshtml\\.cs$/ && isPageModel"
                 },
                 {
                     "command": "extension.goToPageModel",
                     "group": "navigation",
-                    "when": "resourceScheme == file && resourceFilename=~ /.*\\.cshtml$/ && isPage"
+                    "when": "resourceFilename=~ /.*\\.cshtml$/ && isPage"
                 }
             ],
             "commandPalette": [
                 {
                     "command": "extension.goToView",
-                    "when": "editorHasSelection && resourceScheme == file && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/ && isController"
+                    "when": "editorHasSelection && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/ && isController"
                 },
                 {
                     "command": "extension.goToController",
-                    "when": "resourceScheme == file && resourceFilename=~ /.*\\.cshtml$/ && isView"
+                    "when": "resourceFilename=~ /.*\\.cshtml$/ && isView"
                 },
                 {
                     "command": "extension.addView",
-                    "when": "editorHasSelection && resourceScheme == file && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/ && isController"
+                    "when": "editorHasSelection && resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/ && isController"
                 },
                 {
                     "command": "extension.goToPage",
-                    "when": "resourceScheme == file && resourceFilename=~ /.*\\.cshtml\\.cs$/ && isPageModel"
+                    "when": "resourceFilename=~ /.*\\.cshtml\\.cs$/ && isPageModel"
                 },
                 {
                     "command": "extension.goToPageModel",
-                    "when": "resourceScheme == file && resourceFilename=~ /.*\\.cshtml$/ && isPage"
+                    "when": "resourceFilename=~ /.*\\.cshtml$/ && isPage"
                 }
             ]
         }
