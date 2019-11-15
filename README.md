@@ -10,7 +10,7 @@ Switch between Page and it's PageModel using:
 Switch between View and Controller using:
 - Keybindings: `alt + i`
 - Editor context menu: `Go to Controller`, `Go to View`
-- Command palette: `Go to Controller`, `Go to View`*
+- Command palette: `Go to Controller`, `Go to View`
 
 \* requires text selection
 
@@ -19,7 +19,7 @@ Switch between View and Controller using:
 Create View for Action using:
 - Keybindings: `alt + p`
 - Editor context menu: `Add View...`
-- Command palette: `Add View...`*
+- Command palette: `Add View...`
 
 \* requires text selection
 
