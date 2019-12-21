@@ -10,20 +10,13 @@ export function addView() {
         return;
     }
 
-    const path = vscode.window.activeTextEditor.document.fileName;
-
-    if (!isController(path)) {
-        vscode.window.showWarningMessage(messages.notValid('controller'));
-        return;
-    }
-
     const actionName = getClosestActionName(vscode.window.activeTextEditor);
     if (!actionName) {
         vscode.window.showWarningMessage(messages.unableToFindAction);
         return;
     }
 
-    const viewPath = getViewPath(path, actionName);
+    const viewPath = getViewPath(vscode.window.activeTextEditor.document.fileName, actionName);
 
     if (fs.existsSync(viewPath)) {
         vscode.window.showWarningMessage(messages.viewAlreadyExists);

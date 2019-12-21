@@ -8,14 +8,7 @@ export async function goToPage() {
         return;
     }
 
-    const path = vscode.window.activeTextEditor.document.fileName;
-
-    if (!isPageModel(path)) {
-        vscode.window.showWarningMessage(messages.notValid('page model'));
-        return;
-    }
-
-    const pagePath = getPagePath(path);
+    const pagePath = getPagePath(vscode.window.activeTextEditor.document.fileName);
 
     if (!fs.existsSync(pagePath)) {
         vscode.window.showWarningMessage(messages.unableToFind('page'));
@@ -31,21 +24,14 @@ export async function goToPageModel() {
         return;
     }
 
-    const path = vscode.window.activeTextEditor.document.fileName;
-
-    if (!isPage(path)) {
-        vscode.window.showWarningMessage(messages.notValid('page'));
-        return;
-    }
-
-    const pageModelPath = getPageModelPath(path);
+    const pageModelPath = getPageModelPath(vscode.window.activeTextEditor.document.fileName);
 
     if (!fs.existsSync(pageModelPath)) {
         vscode.window.showWarningMessage(messages.unableToFind('page model'));
         return;
     }
 
-    const document = await vscode.workspace.openTextDocument(getPageModelPath(vscode.window.activeTextEditor.document.fileName));
+    const document = await vscode.workspace.openTextDocument(pageModelPath);
     await vscode.window.showTextDocument(document);
 }
 

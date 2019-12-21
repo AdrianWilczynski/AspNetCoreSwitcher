@@ -1,7 +1,9 @@
 export const ext = {
     cs: '.cs',
     cshtml: '.cshtml',
-    cshtmlCs: '.cshtml.cs'
+    cshtmlCs: '.cshtml.cs',
+    razor: '.razor',
+    razorCs: '.razor.cs'
 };
 
 export const dirs = {
@@ -14,7 +16,6 @@ export const dirs = {
 export const controllerSuffix = 'Controller';
 
 export const messages = {
-    notValid: (name: string) => `This file doesn't look like a ${name}.`,
     unableToFind: (name: string) => `Unable to find a matching ${name}.`,
     viewAlreadyExists: 'View already exists.',
     unableToFindAction: "Unable to find an action method declaration."

@@ -8,20 +8,9 @@ export async function goToController() {
         return;
     }
 
-    const path = vscode.window.activeTextEditor.document.fileName;
+    const controllerPath = getControllerPath(vscode.window.activeTextEditor.document.fileName);
 
-    if (!isView(path)) {
-        vscode.window.showWarningMessage(messages.notValid('view'));
-        return;
-    }
-
-    const controllerPath = getControllerPath(path);
-    if (!controllerPath) {
-        vscode.window.showWarningMessage(messages.notValid('view'));
-        return;
-    }
-
-    if (!fs.existsSync(controllerPath)) {
+    if (!controllerPath || !fs.existsSync(controllerPath)) {
         vscode.window.showWarningMessage(messages.unableToFind('controller'));
         return;
     }

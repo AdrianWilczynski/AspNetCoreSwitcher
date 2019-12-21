@@ -20,6 +20,7 @@
         ".NET Core",
         "Razor Pages",
         "MVC",
+        "Blazor",
         "C#",
         "CSharp",
         "Razor",
@@ -42,30 +43,45 @@
         "commands": [
             {
                 "command": "extension.goToView",
-                "title": "Go to View"
+                "title": "Go to View",
+                "enablement": "resourceFilename=~ /.*(?<!\\.cshtml|\\.razor)\\.cs$/ && isController"
             },
             {
                 "command": "extension.goToController",
-                "title": "Go to Controller"
+                "title": "Go to Controller",
+                "enablement": "resourceFilename=~ /.*\\.cshtml$/ && isView"
             },
             {
                 "command": "extension.addView",
-                "title": "Add View"
+                "title": "Add View",
+                "enablement": "resourceFilename=~ /.*(?<!\\.cshtml|\\.razor)\\.cs$/ && isController"
             },
             {
                 "command": "extension.goToPage",
-                "title": "Go to Page"
+                "title": "Go to Page",
+                "enablement": "resourceFilename=~ /.*\\.cshtml\\.cs$/ && isPageModel"
             },
             {
                 "command": "extension.goToPageModel",
-                "title": "Go to PageModel"
+                "title": "Go to PageModel",
+                "enablement": "resourceFilename=~ /.*\\.cshtml$/ && isPage"
+            },
+            {
+                "command": "extension.goToBlazorComponent",
+                "title": "Go to Component",
+                "enablement": "resourceFilename=~ /.*\\.razor\\.cs$/ && resourceScheme == file"
+            },
+            {
+                "command": "extension.goToCodeBehind",
+                "title": "Go to CodeBehind",
+                "enablement": "resourceFilename=~ /.*\\.razor$/ && resourceScheme == file"
             }
         ],
         "keybindings": [
             {
                 "command": "extension.goToView",
                 "key": "alt+i",
-                "when": "resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/ && isController"
+                "when": "resourceFilename=~ /.*(?<!\\.cshtml|\\.razor)\\.cs$/ && isController"
             },
             {
                 "command": "extension.goToController",
@@ -73,9 +89,19 @@
                 "when": "resourceFilename=~ /.*\\.cshtml$/ && isView"
             },
             {
+                "command": "extension.goToView",
+                "key": "alt+o",
+                "when": "resourceFilename=~ /.*(?<!\\.cshtml|\\.razor)\\.cs$/ && isController"
+            },
+            {
+                "command": "extension.goToController",
+                "key": "alt+o",
+                "when": "resourceFilename=~ /.*\\.cshtml$/ && isView"
+            },
+            {
                 "command": "extension.addView",
                 "key": "alt+p",
-                "when": "resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/ && isController"
+                "when": "resourceFilename=~ /.*(?<!\\.cshtml|\\.razor)\\.cs$/ && isController"
             },
             {
                 "command": "extension.goToPage",
@@ -86,6 +112,16 @@
                 "command": "extension.goToPageModel",
                 "key": "alt+o",
                 "when": "resourceFilename=~ /.*\\.cshtml$/ && isPage"
+            },
+            {
+                "command": "extension.goToBlazorComponent",
+                "key": "alt+o",
+                "when": "resourceFilename=~ /.*\\.razor\\.cs$/ && resourceScheme == file"
+            },
+            {
+                "command": "extension.goToCodeBehind",
+                "key": "alt+o",
+                "when": "resourceFilename=~ /.*\\.razor$/ && resourceScheme == file"
             }
         ],
         "menus": {
@@ -93,7 +129,7 @@
                 {
                     "command": "extension.goToView",
                     "group": "navigation",
-                    "when": "resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/  && isController"
+                    "when": "resourceFilename=~ /.*(?<!\\.cshtml|\\.razor)\\.cs$/ && isController"
                 },
                 {
                     "command": "extension.goToController",
@@ -103,7 +139,7 @@
                 {
                     "command": "extension.addView",
                     "group": "1_modification",
-                    "when": "resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/ && isController"
+                    "when": "resourceFilename=~ /.*(?<!\\.cshtml|\\.razor)\\.cs$/ && isController"
                 },
                 {
                     "command": "extension.goToPage",
@@ -114,12 +150,22 @@
                     "command": "extension.goToPageModel",
                     "group": "navigation",
                     "when": "resourceFilename=~ /.*\\.cshtml$/ && isPage"
+                },
+                {
+                    "command": "extension.goToBlazorComponent",
+                    "group": "navigation",
+                    "when": "resourceFilename=~ /.*\\.razor\\.cs$/ && resourceScheme == file"
+                },
+                {
+                    "command": "extension.goToCodeBehind",
+                    "group": "navigation",
+                    "when": "resourceFilename=~ /.*\\.razor$/ && resourceScheme == file"
                 }
             ],
             "commandPalette": [
                 {
                     "command": "extension.goToView",
-                    "when": "resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/ && isController"
+                    "when": "resourceFilename=~ /.*(?<!\\.cshtml|\\.razor)\\.cs$/ && isController"
                 },
                 {
                     "command": "extension.goToController",
@@ -127,7 +173,7 @@
                 },
                 {
                     "command": "extension.addView",
-                    "when": "resourceFilename=~ /.*(?<!\\.cshtml)\\.cs$/ && isController"
+                    "when": "resourceFilename=~ /.*(?<!\\.cshtml|\\.razor)\\.cs$/ && isController"
                 },
                 {
                     "command": "extension.goToPage",
@@ -136,6 +182,14 @@
                 {
                     "command": "extension.goToPageModel",
                     "when": "resourceFilename=~ /.*\\.cshtml$/ && isPage"
+                },
+                {
+                    "command": "extension.goToBlazorComponent",
+                    "when": "resourceFilename=~ /.*\\.razor\\.cs$/ && resourceScheme == file"
+                },
+                {
+                    "command": "extension.goToCodeBehind",
+                    "when": "resourceFilename=~ /.*\\.razor$/ && resourceScheme == file"
                 }
             ]
         }

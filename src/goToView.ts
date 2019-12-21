@@ -1,17 +1,10 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import { messages } from './shared';
-import { getViewPath, isController, getClosestActionName } from './view';
+import { getViewPath, getClosestActionName } from './view';
 
 export async function goToView() {
     if (!vscode.window.activeTextEditor) {
-        return;
-    }
-
-    const path = vscode.window.activeTextEditor.document.fileName;
-
-    if (!isController(path)) {
-        vscode.window.showWarningMessage(messages.notValid('controller'));
         return;
     }
 
@@ -20,6 +13,8 @@ export async function goToView() {
         vscode.window.showWarningMessage(messages.unableToFindAction);
         return;
     }
+
+    const path = vscode.window.activeTextEditor.document.fileName;
 
     let viewPath = getViewPath(path, actionName);
 

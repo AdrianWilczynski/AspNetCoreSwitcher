@@ -4,6 +4,7 @@ import { goToController, isView } from './goToController';
 import { addView } from './addView';
 import { goToPage, goToPageModel, isPage, isPageModel } from './goToPage';
 import { isController } from './view';
+import { goToBlazorComponent, goToCodeBehind } from './goToBlazorComponent';
 
 export function activate(context: vscode.ExtensionContext) {
     setContext(vscode.window.activeTextEditor);
@@ -14,6 +15,8 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('extension.goToController', goToController),
         vscode.commands.registerCommand('extension.goToPage', goToPage),
         vscode.commands.registerCommand('extension.goToPageModel', goToPageModel),
+        vscode.commands.registerCommand('extension.goToBlazorComponent', goToBlazorComponent),
+        vscode.commands.registerCommand('extension.goToCodeBehind', goToCodeBehind),
 
         vscode.window.onDidChangeActiveTextEditor(setContext));
 }
@@ -25,17 +28,22 @@ function setContext(editor: vscode.TextEditor | undefined) {
         return;
     }
 
+    const contexts = [
+        { name: 'isPage', function: isPage },
+        { name: 'isPageModel', function: isPageModel },
+        { name: 'isController', function: isController },
+        { name: 'isView', function: isView }
+    ];
+
     if (editor.document.isUntitled || editor.document.uri.scheme !== 'file') {
-        vscode.commands.executeCommand('setContext', 'isPage', false);
-        vscode.commands.executeCommand('setContext', 'isPageModel', false);
-        vscode.commands.executeCommand('setContext', 'isController', false);
-        vscode.commands.executeCommand('setContext', 'isView', false);
+        for (const context of contexts) {
+            vscode.commands.executeCommand('setContext', context.name, false);
+        }
 
         return;
     }
 
-    vscode.commands.executeCommand('setContext', 'isPage', isPage(editor.document.fileName));
-    vscode.commands.executeCommand('setContext', 'isPageModel', isPageModel(editor.document.fileName));
-    vscode.commands.executeCommand('setContext', 'isController', isController(editor.document.fileName));
-    vscode.commands.executeCommand('setContext', 'isView', isView(editor.document.fileName));
+    for (const context of contexts) {
+        vscode.commands.executeCommand('setContext', context.name, context.function(editor.document.fileName));
+    }
 }
