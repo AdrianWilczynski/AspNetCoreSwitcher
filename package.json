@@ -1,7 +1,7 @@
 {
     "name": "asp-net-core-switcher",
     "displayName": "ASP.NET Core Switcher",
-    "description": "Quickly switch between views, controllers, pages and page models in ASP.NET Core using keybindings, context menu or command palette.",
+    "description": "Quickly switch between views, controllers, pages, page models and Blazor components in ASP.NET Core using keybindings, context menu or command palette.",
     "publisher": "adrianwilczynski",
     "repository": {
         "type": "git",

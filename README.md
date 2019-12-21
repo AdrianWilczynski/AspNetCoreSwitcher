@@ -27,7 +27,7 @@ Create View for Action using:
 
 ## Blazor
 
-Switch between Component (`.razor`) and it's CodeBehind (`.razor.cs`) using:
+Switch between Component (`.razor`) and its CodeBehind (`.razor.cs`) using:
 - Keybindings: `alt + o`
 - Editor context menu: `Go to Component`, `Go to CodeBehind`
 - Command palette: `Go to Component`, `Go to CodeBehind`
