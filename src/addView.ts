@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
 import { ext, messages } from './constants';
-import { getViewPath, isController, getClosestActionName } from './view';
+import { getViewPath, getClosestActionName } from './view';
 
 export function addView() {
     if (!vscode.window.activeTextEditor) {
