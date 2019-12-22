@@ -1,5 +1,5 @@
 import * as path from 'path';
-import { ext, dirs, controllerSuffix } from './shared';
+import { ext, dirs, controllerSuffix } from './constants';
 import * as vscode from 'vscode';
 
 export function getViewPath(controllerPath: string, actionName: string, inShared: boolean = false) {

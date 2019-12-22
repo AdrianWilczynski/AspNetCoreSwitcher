@@ -1,22 +1,9 @@
-import * as vscode from 'vscode';
 import * as path from 'path';
-import * as fs from 'fs';
-import { controllerSuffix, ext, dirs, messages } from './shared';
+import { controllerSuffix, ext, dirs } from './constants';
+import { goTo } from './goTo';
 
 export async function goToController() {
-    if (!vscode.window.activeTextEditor) {
-        return;
-    }
-
-    const controllerPath = getControllerPath(vscode.window.activeTextEditor.document.fileName);
-
-    if (!controllerPath || !fs.existsSync(controllerPath)) {
-        vscode.window.showWarningMessage(messages.unableToFind('controller'));
-        return;
-    }
-
-    const document = await vscode.workspace.openTextDocument(controllerPath);
-    await vscode.window.showTextDocument(document);
+    await goTo('controller', getControllerPath);
 }
 
 export function getControllerPath(viewPath: string) {

@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
-import { ext, messages } from './shared';
+import { ext, messages } from './constants';
 import { getViewPath, isController, getClosestActionName } from './view';
 
 export function addView() {

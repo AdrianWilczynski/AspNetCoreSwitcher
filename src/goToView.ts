@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
-import { messages } from './shared';
+import { messages } from './constants';
 import { getViewPath, getClosestActionName } from './view';
 
 export async function goToView() {

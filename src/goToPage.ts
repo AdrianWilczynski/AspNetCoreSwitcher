@@ -1,38 +1,13 @@
-import * as vscode from 'vscode';
 import * as path from 'path';
-import * as fs from 'fs';
-import { dirs, ext, messages } from './shared';
+import { dirs, ext } from './constants';
+import { goTo } from './goTo';
 
 export async function goToPage() {
-    if (!vscode.window.activeTextEditor) {
-        return;
-    }
-
-    const pagePath = getPagePath(vscode.window.activeTextEditor.document.fileName);
-
-    if (!fs.existsSync(pagePath)) {
-        vscode.window.showWarningMessage(messages.unableToFind('page'));
-        return;
-    }
-
-    const document = await vscode.workspace.openTextDocument(pagePath);
-    await vscode.window.showTextDocument(document);
+    await goTo('page', getPagePath);
 }
 
 export async function goToPageModel() {
-    if (!vscode.window.activeTextEditor) {
-        return;
-    }
-
-    const pageModelPath = getPageModelPath(vscode.window.activeTextEditor.document.fileName);
-
-    if (!fs.existsSync(pageModelPath)) {
-        vscode.window.showWarningMessage(messages.unableToFind('page model'));
-        return;
-    }
-
-    const document = await vscode.workspace.openTextDocument(pageModelPath);
-    await vscode.window.showTextDocument(document);
+    await goTo('page model', getPageModelPath);
 }
 
 export function getPagePath(pageModelPath: string) {
