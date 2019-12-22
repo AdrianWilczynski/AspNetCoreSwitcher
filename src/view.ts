@@ -40,7 +40,7 @@ export function getClosestActionName(editor: vscode.TextEditor) {
 }
 
 export function getActionNameFromLine(line: string) {
-    const matches = line.match(/(?<!^\w)(IActionResult|ActionResult|ViewResult|IStatusCodeActionResult)[ \t]*>?[ \t]+(\w+)\(.*$/);
+    const matches = line.match(/(?<!^\w)(IActionResult|ActionResult|ViewResult)[ \t]*>?[ \t]+(\w+)\(.*$/);
     if (!matches) {
         return;
     }
